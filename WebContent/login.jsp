@@ -17,6 +17,8 @@
 	</form>
 
 	<input type="button" value="获取用户json" onclick="ajaxGetUsers()" />
+	<input type="button" value="设置cookie" onclick="setCookie()" />
+	<input type="button" value="读取cookie" onclick="getCookie()" />
 
 
 
@@ -26,7 +28,32 @@
 		}
 
 		function ajaxGetUsers() {
+			ajax("servlet/UsersServlet", function(responseText) {
+				var json = eval("(" + responseText + ")");
+				for (var i = 0; i < json.length; i++) {
+					console.log(json[i]);
+				}
+			}, '{"id":"xiaohong"}')
 
+		}
+
+		function setCookie() {
+			ajax("servlet/CookieServlet", function(responseText) {
+				var json = eval("(" + responseText + ")");
+				for (var i = 0; i < json.length; i++) {
+					console.log(json[i]);
+				}
+			})
+		}
+
+		function getCookie() {
+			ajax("servlet/GetCookieServlet", function(response) {
+
+			})
+
+		}
+
+		function ajax(url, successCallBack, data) {
 			var xmlHttp;
 			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 				xmlhttp = new XMLHttpRequest();
@@ -37,16 +64,17 @@
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					console.log(xmlhttp.responseText)
-					var json = eval("(" + xmlhttp.responseText + ")");
+					successCallBack(xmlhttp.responseText);
+					/* var json = eval("(" + xmlhttp.responseText + ")");
 					for (var i = 0; i < json.length; i++) {
 						console.log(json[i]);
-					}
+					} */
 				}
 			}
 
-			xmlhttp.open("post", "servlet/UsersServlet", true);
+			xmlhttp.open("post", url, true);
 			xmlhttp.setRequestHeader("Content-type", "application/json");
-			xmlhttp.send('{"id":"xiaohong"}');
+			xmlhttp.send(data);
 		}
 	</script>
 </body>

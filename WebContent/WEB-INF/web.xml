@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
-  <!-- 配置过滤器 -->
   <filter>
     <filter-name>HttpFilter</filter-name>
     <filter-class>filter.HttpFilter</filter-class>
@@ -13,11 +12,9 @@
     <filter-name>HttpFilter</filter-name>
     <url-pattern>/servlet/*</url-pattern>
   </filter-mapping>
-  
-  <!-- 配置监听器 -->
-  <listener>  
-    <listener-class>listener.ServletListener</listener-class>  
-</listener>    
+  <listener>
+    <listener-class>listener.ServletListener</listener-class>
+  </listener>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
